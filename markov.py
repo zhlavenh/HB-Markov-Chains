@@ -48,27 +48,19 @@ def make_chains(text_string):
 
     chains = {}
 
-    #make a set of keys from string so there are no duplicate pairs
-    key_from_string = set()
-
     text_string = text_string.split(" ")
 
-    word1 = 0
-    word2 = 1
-    word3 = 2
+    word1, word2, word3 = 0, 1, 2
 
     while word3 <= (len(text_string)-1):
         key = (text_string[word1], text_string[word2])
         value = [text_string[word3]]
 
-        chains[key]=value
-
         if key not in chains.keys():
             chains[key] = value
         
-        elif key in chains.keys():
-            chains.get(key, chains[key] + value) 
-
+        else:  
+            chains[key] += value
 
         word1 += 1
         word2 += 1
