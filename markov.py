@@ -11,8 +11,14 @@ def open_and_read_file(file_path):
     """
 
     # your code goes here
+    file_contents = open(file_path)
 
-    return 'Contents of your file as one long string'
+    file_content_string = " ".join(file_contents.read().splitlines())
+
+    file_contents.close()
+
+
+    return file_content_string
 
 
 def make_chains(text_string):
@@ -42,9 +48,35 @@ def make_chains(text_string):
 
     chains = {}
 
-    # your code goes here
+    #make a set of keys from string so there are no duplicate pairs
+    key_from_string = set()
 
-    return chains
+    text_string = text_string.split(" ")
+
+    word1 = 0
+    word2 = 1
+    word3 = 2
+
+    while word3 <= (len(text_string)-1):
+        key = (text_string[word1], text_string[word2])
+        value = [text_string[word3]]
+
+        chains[key]=value
+
+        if key not in chains.keys():
+            chains[key] = value
+        
+        elif key in chains.keys():
+            chains.get(key, chains[key] + value) 
+
+
+        word1 += 1
+        word2 += 1
+        word3 += 1
+
+    print(chains)
+
+    # return chains
 
 
 def make_text(chains):
@@ -68,4 +100,6 @@ chains = make_chains(input_text)
 # Produce random text
 random_text = make_text(chains)
 
-print(random_text)
+# print(random_text)
+
+# print(open_and_read_file("green-eggs.txt"))
