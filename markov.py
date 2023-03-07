@@ -65,23 +65,37 @@ def make_chains(text_string):
         word1 += 1
         word2 += 1
         word3 += 1
-
-    print(chains)
-
-    # return chains
+    
+    return chains
 
 
 def make_text(chains):
     """Return text from chains."""
-
     words = []
 
-    # your code goes here
+    #Generatign random keys from dictionary
+    link_list = [key for key in chains.keys()]
+    link = choice(link_list)
+    words += link
+  
 
-    return ' '.join(words)
+    while True:
+        try:
+            #Taking new key from tuple to use for connection
+            new_key = (link[1], choice(chains[link]))
+            words.append(new_key[1])
+            link = new_key
+
+        except KeyError:
+            return ' '.join(words)
+
+
+
+
 
 
 input_path = 'green-eggs.txt'
+# input_path = 'test_file.txt'
 
 # Open the file and turn it into one long string
 input_text = open_and_read_file(input_path)
@@ -92,6 +106,6 @@ chains = make_chains(input_text)
 # Produce random text
 random_text = make_text(chains)
 
-# print(random_text)
+print(random_text)
 
 # print(open_and_read_file("green-eggs.txt"))
